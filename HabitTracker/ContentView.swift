@@ -20,25 +20,22 @@ struct ContentView: View {
             
             
             NavigationView{
-                LinearGradient(gradient: Gradient(colors: [Color.init(red: 48/255, green: 195/255, blue: 253/255), Color.init(red: 179/255, green: 74/255, blue: 254/255)]), startPoint: .topLeading, endPoint: .bottomTrailing)
-                    .edgesIgnoringSafeArea(.all)
-                
-                List(habitItems.habits){habit in
-                    NavigationLink(destination: Text("Details Coming Soon")){
-                        HStack{
-                            Text(habit.name)
-                            
-                            Spacer()
-                            Button("👍🏻"){
-                                //
-                            }
-                            Button("👎🏻"){
-                                //
+                    
+                    List(habitItems.habits){habit in
+                        NavigationLink(destination: Text("Details Coming Soon")){
+                            HStack{
+                                Text(habit.name)
+                                
+                                Spacer()
+                                Button("👍🏻"){
+                                    //
+                                }
+                                Button("👎🏻"){
+                                    //
+                                }
                             }
                         }
-                    }
                 }
-            
                 
                 .navigationBarTitle("Habit Tracker")
             }

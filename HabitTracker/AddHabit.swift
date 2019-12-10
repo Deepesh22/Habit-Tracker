@@ -22,18 +22,19 @@ struct AddHabit: View {
     
     var body: some View {
         NavigationView{
-            Form{
-                TextField("Add Name", text: $name)
-                
-                Picker("Choose type of Habit", selection: $type){
-                    ForEach(Self.types, id:\.self){
-                        Text($0)
-                    }
+                Form{
+                    TextField("Add Name", text: $name)
+                    
+                    Picker("Choose type of Habit", selection: $type){
+                        ForEach(Self.types, id:\.self){
+                            Text($0)
+                        }
+                    }.pickerStyle(SegmentedPickerStyle())
+                    
+                    
+                    TextField("Schedule", text: $schedule)
                 }
-                
-                
-                TextField("Schedule", text: $schedule)
-            }
+                    
             .navigationBarTitle("Add new habit")
             .navigationBarItems(trailing: Button("Save") {
                 if self.name != "" {
