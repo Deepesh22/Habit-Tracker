@@ -26,7 +26,7 @@ struct AddHabit: View {
         formatter.dateFormat = "MMMM-dd-yyyy"
         
         let today = formatter.date(from: formatter.string(from: Date()))!
-
+        
         let formatted = formatter.date(from: formatter.string(from: dateTarget))!
         
         return Calendar.current.dateComponents([.day], from: today, to: formatted).day!
@@ -41,7 +41,7 @@ struct AddHabit: View {
                 ZStack{
                     
                     LinearGradient(gradient: Gradient(colors: [Color.init(red: 179/255, green: 74/255, blue: 254/255), Color.init(red: 48/255, green: 195/255, blue: 253/255)]), startPoint: .topLeading, endPoint: .bottomTrailing)
-                    .edgesIgnoringSafeArea(.all)
+                        .edgesIgnoringSafeArea(.all)
                     
                     VStack(alignment: .leading, spacing: 5){
                         
@@ -60,12 +60,12 @@ struct AddHabit: View {
                                 .foregroundColor(Color.init(.sRGB, red: 1, green: 1, blue: 1, opacity: 0.5))
                                 .frame(width: geo.size.width - 20, height: 80)
                             VStack(alignment: .leading){
-                            Text("This habit is all about???")
-                            TextField("Add a note", text: self.$note)
+                                Text("This habit is all about???")
+                                TextField("Add a note", text: self.$note)
                             }
-                        .padding(40)
+                            .padding(40)
                         }
-
+                        
                         ZStack {
                             RoundedRectangle(cornerRadius: 10, style: .circular)
                                 .foregroundColor(Color.init(.sRGB, red: 1, green: 1, blue: 1, opacity: 0.5))
@@ -84,15 +84,15 @@ struct AddHabit: View {
                     }
                 }
             }
-                    
+                
             .navigationBarTitle("Add new habit")
             .navigationBarItems(trailing: Button("Save") {
                 if self.name != "" && self.note != ""{
                     let item = Habit(type: self.type, name: self.name, note: self.note)
-                        self.habitItems.habits.append(item)
-                        self.presentationMode.wrappedValue.dismiss()
-                    }
+                    self.habitItems.habits.append(item)
+                    self.presentationMode.wrappedValue.dismiss()
                 }
+            }
             .buttonStyle(PlainButtonStyle())
             )
         }

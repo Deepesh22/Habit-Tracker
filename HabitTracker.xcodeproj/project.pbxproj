@@ -302,6 +302,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"HabitTracker/Preview Content\"";
+				DEVELOPMENT_TEAM = HNHUAH9TAG;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = HabitTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -321,6 +322,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"HabitTracker/Preview Content\"";
+				DEVELOPMENT_TEAM = HNHUAH9TAG;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = HabitTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
