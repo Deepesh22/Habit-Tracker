@@ -37,21 +37,53 @@ struct AddHabit: View {
     
     var body: some View {
         NavigationView{
-                Form{
-                    Section{
-                        TextField("Add Name", text: $name)
+            GeometryReader{ geo in
+                ZStack{
+                    
+                    LinearGradient(gradient: Gradient(colors: [Color.init(red: 179/255, green: 74/255, blue: 254/255), Color.init(red: 48/255, green: 195/255, blue: 253/255)]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                    .edgesIgnoringSafeArea(.all)
+                    
+                    VStack(alignment: .leading, spacing: 5){
                         
-                        TextField("Add a note", text: $note)
-                    }
-
-                    Section(header: Text("Habit is..")){
-                        Picker("Choose type of Habit", selection: $type){
-                            ForEach(Self.types, id:\.self){
-                                Text($0)
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 10, style: .circular)
+                                .foregroundColor(Color.init(.sRGB, red: 1, green: 1, blue: 1, opacity: 0.5))
+                                .frame(width: geo.size.width - 20, height: 80)
+                            VStack(alignment: .leading){
+                                Text("So what's the habit???")
+                                TextField("Add Name", text: self.$name)
                             }
-                        }.pickerStyle(SegmentedPickerStyle())
+                            .padding(40)
+                        }
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 10, style: .circular)
+                                .foregroundColor(Color.init(.sRGB, red: 1, green: 1, blue: 1, opacity: 0.5))
+                                .frame(width: geo.size.width - 20, height: 80)
+                            VStack(alignment: .leading){
+                            Text("This habit is all about???")
+                            TextField("Add a note", text: self.$note)
+                            }
+                        .padding(40)
+                        }
+
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 10, style: .circular)
+                                .foregroundColor(Color.init(.sRGB, red: 1, green: 1, blue: 1, opacity: 0.5))
+                                .frame(width: geo.size.width - 20, height: 80)
+                            VStack(alignment: .leading){
+                                Text("The habit is to...")
+                                Picker("Choose type of Habit", selection: self.$type){
+                                    ForEach(Self.types, id:\.self){
+                                        Text($0)
+                                    }
+                                }.pickerStyle(SegmentedPickerStyle())
+                            }
+                            .padding(40)
+                        }
+                        Spacer()
                     }
                 }
+            }
                     
             .navigationBarTitle("Add new habit")
             .navigationBarItems(trailing: Button("Save") {
@@ -61,6 +93,7 @@ struct AddHabit: View {
                         self.presentationMode.wrappedValue.dismiss()
                     }
                 }
+            .buttonStyle(PlainButtonStyle())
             )
         }
     }

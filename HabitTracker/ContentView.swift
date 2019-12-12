@@ -28,64 +28,71 @@ struct ContentView: View {
                 
                 ScrollView(.vertical){
                     VStack(){
-                        Text("Habit Tracker")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                            .foregroundColor(.black)
-                            .padding()
                         
-                        ForEach(self.habitItems.habits, id: \.id){habit in
+                        ZStack{
+//                            RoundedRectangle(cornerRadius: 10, style: .circular)
+//                            .foregroundColor(Color.init(.sRGB, red: 1, green: 1, blue: 1, opacity: 0.5))
+//                            .frame(width: geo.size.width - 20, height: 80)
                             
-                            Button(action: {
-                                print(habit)
-                                self.detailScreenIsPresented.toggle()
-                            }){
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 10, style: .circular)
-                                        .foregroundColor(Color.init(.sRGB, red: 1, green: 1, blue: 1, opacity: 0.5))
-                                        .frame(width: geo.size.width - 20, height: 80)
-                                    VStack {
-                                        HStack {
-                                            VStack(alignment: .leading) {
-                                                Text(habit.name)
-                                                    .font(.headline)
-                                                    .foregroundColor(.primary)
-                                                Text(habit.note)
-                                                    .font(.subheadline)
-                                                    .foregroundColor(.secondary)
-                                            }
-                                            .padding(20)
-                                            
-                                            Spacer()
-                                            
-                                            VStack(alignment: .trailing){
-                                                Button(action: {
-                                                    self.habitItems.complete(withHabitId: habit.id)
-                                                }) {
-                                                    ZStack {
-                                                        Circle()
-                                                            .foregroundColor(habit.hasCompletedForToday ? Color.green : Color.red)
-                                                            .frame(width: 44, height: 44)
-                                                        Image(systemName: "checkmark")
-                                                            .font(.headline)
-                                                            .foregroundColor(.white)
-                                                    }
+                            Text("Habit Tracker")
+                                .font(.largeTitle)
+                                .fontWeight(.bold)
+                                .foregroundColor(.black)
+                                .padding()
+                        }
+                        
+                            ForEach(self.habitItems.habits, id: \.id){habit in
+                                
+                                Button(action: {
+                                    print(habit)
+                                    self.detailScreenIsPresented.toggle()
+                                }){
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 10, style: .circular)
+                                            .foregroundColor(Color.init(.sRGB, red: 1, green: 1, blue: 1, opacity: 0.5))
+                                            .frame(width: geo.size.width - 20, height: 80)
+                                        VStack {
+                                            HStack {
+                                                VStack(alignment: .leading) {
+                                                    Text(habit.name)
+                                                        .font(.headline)
+                                                        .foregroundColor(.primary)
+                                                    Text(habit.note)
+                                                        .font(.subheadline)
+                                                        .foregroundColor(.secondary)
                                                 }
                                                 .padding(20)
-                                                .sheet(isPresented: self.$detailScreenIsPresented){
-                                                    
-                                                    HabitDetailView(habit: habit, habitItems: self.habitItems)
+                                                
+                                                Spacer()
+                                                
+                                                VStack(alignment: .trailing){
+                                                    Button(action: {
+                                                        self.habitItems.complete(withHabitId: habit.id)
+                                                    }) {
+                                                        ZStack {
+                                                            Circle()
+                                                                .foregroundColor(habit.hasCompletedForToday ? Color.green : Color.red)
+                                                                .frame(width: 44, height: 44)
+                                                            Image(systemName: "checkmark")
+                                                                .font(.headline)
+                                                                .foregroundColor(.white)
+                                                        }
+                                                    }
+                                                    .padding(20)
+                                                    .sheet(isPresented: self.$detailScreenIsPresented){
+                                                        
+                                                        HabitDetailView(habit: habit, habitItems: self.habitItems)
+                                                    }
                                                 }
                                             }
                                         }
-                                    }
 
+                                    }
                                 }
+                                
+                                
                             }
-                            
-                            
-                        }
-                        
+
                     }
                     
                 }

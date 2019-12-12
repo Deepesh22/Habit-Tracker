@@ -72,4 +72,17 @@ class HabitItems: ObservableObject{
         }
     }
     
+    func remove(withHabitId: UUID){
+        
+        var index = 0
+        
+        for i in 0..<self.habits.count{
+            if self.habits[index].id == withHabitId{
+                index = i
+            }
+        }
+        
+        self.habits.remove(at: index)
+    }
+    
 }
