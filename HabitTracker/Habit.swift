@@ -10,11 +10,21 @@ import Foundation
 
 
 struct Habit: Identifiable, Codable{
-    let id =  UUID()
+
+    let id : UUID = UUID()
     let type: String
     let name: String
-    let schedule: String
-    let numberOfTimesInWeek: String?
+    let note: String
+    let startDate: Date = Date()
+    var bestStreak: Int = 0
+    var currentStreak: Int = 0
+    var lastCompletionDate: Date?
+    var numberOfCompletion: Int = 0
+    
+    var hasCompletedForToday: Bool{
+        return lastCompletionDate?.isToday ?? false
+    }
+    
 }
 
 
@@ -28,6 +38,9 @@ class HabitItems: ObservableObject{
                 
                 UserDefaults.standard.set(encoded, forKey: "habits")
             }
+            else{
+                print("ERROR in encoding")
+            }
         }
     }
     
@@ -37,6 +50,24 @@ class HabitItems: ObservableObject{
             
             if let decoded = try? decode.decode([Habit].self, from: habits){
                 self.habits = decoded
+            }else{
+                print("Eror decoding")
+            }
+        }else{
+            print("Error finding key")
+        }
+    }
+    
+    
+    func complete(withHabitId: UUID){
+        for index in 0..<self.habits.count{
+            if self.habits[index].id == withHabitId{
+                self.habits[index].lastCompletionDate = Date()
+                self.habits[index].currentStreak += 1
+                if self.habits[index].currentStreak >= self.habits[index].bestStreak{
+                    self.habits[index].bestStreak =  self.habits[index].currentStreak
+                }
+                self.habits[index].numberOfCompletion += 1
             }
         }
     }
