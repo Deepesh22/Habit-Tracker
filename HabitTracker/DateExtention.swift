@@ -23,16 +23,4 @@ extension Date {
         let calendar = Calendar.current
         return calendar.isDateInYesterday(self)
     }
-    
-    func countDays(_ from: Date, _ to: Date) -> Int{
-        
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMMM-dd-yyyy"
-        
-        let formattedFrom = formatter.date(from: formatter.string(from: from))!
-
-        let formattedTo = formatter.date(from: formatter.string(from: to))!
-        
-        return Calendar.current.dateComponents([.day], from: formattedFrom, to: formattedTo).day!
-    }
 }

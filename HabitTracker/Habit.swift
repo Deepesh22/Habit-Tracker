@@ -21,6 +21,12 @@ struct Habit: Identifiable, Codable{
     var lastCompletionDate: Date?
     var numberOfCompletion: Int = 0
     
+    var success: Double{
+        let totalDays = countDays(startDate, Date()) + 1
+        
+        return  Double(numberOfCompletion) / Double(totalDays)
+    }
+    
     var hasCompletedForToday: Bool{
         return lastCompletionDate?.isToday ?? false
     }
@@ -87,4 +93,18 @@ class HabitItems: ObservableObject{
         self.habits.remove(at: habitTobeRemoved)
     }
     
+}
+
+
+
+func countDays(_ from: Date, _ to: Date) -> Int{
+    
+    let formatter = DateFormatter()
+    formatter.dateFormat = "MMMM-dd-yyyy"
+    
+    let formattedFrom = formatter.date(from: formatter.string(from: from))!
+
+    let formattedTo = formatter.date(from: formatter.string(from: to))!
+    
+    return Calendar.current.dateComponents([.day], from: formattedFrom, to: formattedTo).day!
 }

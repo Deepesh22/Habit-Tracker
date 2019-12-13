@@ -50,6 +50,7 @@ struct HabitDetailView: View {
                             }
                             
                             Spacer()
+                            Divider()
                             
                             VStack(alignment: .leading){
                                 Text("Current Streak")
@@ -66,41 +67,42 @@ struct HabitDetailView: View {
                         }
                         .padding(40)
                         
-                        HStack{
-                            
-                            VStack(alignment: .leading){
-                                Text("Days done")
+                        Divider()
+                        
+                        VStack(alignment: .leading){
+                            Text("Days done")
+                                .font(.title)
+                            HStack(alignment: .center){
+                                Text("\(self.habit.numberOfCompletion)")
                                     .font(.title)
-                                HStack(alignment: .center){
-                                    Text("\(self.habit.numberOfCompletion)")
-                                        .font(.title)
-                                    Image(systemName: "sparkles")
-                                        .resizable()
-                                        .foregroundColor(Color.white)
-                                        .frame(width: 20, height: 30)
-                                }
-                            }
-                            
-                            Spacer()
-                            
-                            VStack(alignment: .leading){
-                                if self.habit.hasCompletedForToday{
-                                    Text("Done Today")
-                                        .font(.title)
-                                        .foregroundColor(Color.green)
-                                }else{
-                                    Text("Not Done Today")
-                                        .font(.title)
-                                        .foregroundColor(Color.red)
-                                }
+                                Image(systemName: "sparkles")
+                                    .resizable()
+                                    .foregroundColor(Color.white)
+                                    .frame(width: 20, height: 30)
                             }
                         }
                         .padding(40)
                         
+                        Divider()
                         
-                        Text("Following this habit from \(self.formatterDate)")
+                        Text("Following this habit from \(self.formatterDate) with \(self.habit.success*100, specifier: "%.2f")% success")
                             .font(.headline)
+                            .fontWeight(.bold)
+                            .foregroundColor(.secondary)
+                            .italic()
                             .padding(40)
+                        
+                        HStack(){
+                            Spacer()
+                            Text(self.habit.type)
+                                .font(.title)
+                                .padding()
+                                .foregroundColor(.red)
+                                .background(Color.white)
+                                .cornerRadius(50)
+                            Spacer()
+                        }
+                        .padding(40)
                         
                         
                         Spacer()
