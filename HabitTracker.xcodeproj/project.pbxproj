@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B103CFAB23A3F70B0037971B /* HabitRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B103CFAA23A3F70B0037971B /* HabitRowView.swift */; };
 		B125EAD923A28B4C00007D99 /* DateExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = B125EAD823A28B4C00007D99 /* DateExtention.swift */; };
 		B1641D5B23A0053C009BAF9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1641D5A23A0053C009BAF9F /* AppDelegate.swift */; };
 		B1641D5D23A0053C009BAF9F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1641D5C23A0053C009BAF9F /* SceneDelegate.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B103CFAA23A3F70B0037971B /* HabitRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitRowView.swift; sourceTree = "<group>"; };
 		B125EAD823A28B4C00007D99 /* DateExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtention.swift; sourceTree = "<group>"; };
 		B1641D5723A0053C009BAF9F /* HabitTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1641D5A23A0053C009BAF9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				B1641D5E23A0053C009BAF9F /* ContentView.swift */,
 				B17EB8E023A1175700231FF6 /* HabitDetailView.swift */,
 				B125EAD823A28B4C00007D99 /* DateExtention.swift */,
+				B103CFAA23A3F70B0037971B /* HabitRowView.swift */,
 				B1641D7823A02CCA009BAF9F /* AddHabit.swift */,
 				B1641D7423A018EB009BAF9F /* Habit.swift */,
 				B1641D6023A0053E009BAF9F /* Assets.xcassets */,
@@ -158,6 +161,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B103CFAB23A3F70B0037971B /* HabitRowView.swift in Sources */,
 				B1641D5B23A0053C009BAF9F /* AppDelegate.swift in Sources */,
 				B1641D7923A02CCA009BAF9F /* AddHabit.swift in Sources */,
 				B17EB8E123A1175700231FF6 /* HabitDetailView.swift in Sources */,

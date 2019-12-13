@@ -13,9 +13,11 @@ struct HabitDetailView: View {
     let habit: Habit
     let habitItems: HabitItems
     
+    @Environment(\.presentationMode) var presentationMode
+    
     var formatterDate: String{
         let formatter = DateFormatter()
-        formatter.dateFormat = "MMMM dd yyyy"
+        formatter.dateFormat = "MMMM dd, yyyy"
         
         print(habit.name, habit.id)
         
@@ -31,19 +33,7 @@ struct HabitDetailView: View {
                         .edgesIgnoringSafeArea(.all)
                     
                     VStack(alignment: .leading, spacing: 5){
-                        
-                        ZStack{
-                            RoundedRectangle(cornerRadius: 10, style: .circular)
-                                .foregroundColor(Color.init(.sRGB, red: 1, green: 1, blue: 1, opacity: 0.5))
-                                .frame(width: geo.size.width - 20, height: 80)
-                                .padding()
-                            VStack(alignment: .leading){
-                                Text(self.habit.note)
-                                    .font(.headline)
-                            }
-                            .padding(40)
-                        }
-                        
+            
                         HStack{
                             
                             VStack(alignment: .leading){
@@ -118,6 +108,12 @@ struct HabitDetailView: View {
                 }
             }
             .navigationBarTitle(habit.name)
+            .navigationBarItems(trailing:
+                Button("Delete"){
+                    self.habitItems.remove(withHabitId: self.habit.id)
+                    self.presentationMode.wrappedValue.dismiss()
+                }
+            )
         }
     }
 }
