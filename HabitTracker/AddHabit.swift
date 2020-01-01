@@ -88,7 +88,7 @@ struct AddHabit: View {
             .navigationBarTitle("Add new habit")
             .navigationBarItems(trailing: Button("Save") {
                 if self.name != "" && self.note != ""{
-                    let item = Habit(type: self.type, name: self.name, note: self.note)
+                    let item = Habit(type: self.type, name: self.name, note: self.note, startDate: Date())
                     self.habitItems.habits.append(item)
                     self.presentationMode.wrappedValue.dismiss()
                 }

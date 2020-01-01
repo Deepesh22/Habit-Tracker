@@ -15,7 +15,7 @@ struct Habit: Identifiable, Codable{
     let type: String
     let name: String
     let note: String
-    let startDate: Date = Date()
+    let startDate: Date
     var bestStreak: Int = 0
     var currentStreak: Int = 0
     var lastCompletionDate: Date?

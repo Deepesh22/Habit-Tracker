@@ -53,6 +53,7 @@ struct HabitRowView: View {
                                             .foregroundColor(.white)
                                     }
                                 }
+                                .disabled(self.habit.hasCompletedForToday)
                                 .padding(20)
                             }
                         }
