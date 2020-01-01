@@ -24,22 +24,19 @@ struct ContentView: View {
                 .edgesIgnoringSafeArea(.all)
             
             
-            GeometryReader{ geo in
+            VStack{
+                Text("Habit Tracker")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundColor(.black)
+                    .padding()
+                        
                 
                 ScrollView(.vertical){
-                    VStack(){
-                        Text("Habit Tracker")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                            .foregroundColor(.black)
-                            .padding()
-                        
-                        ForEach(self.habitItems.habits, id: \.id){habit in
-                            HabitRowView(habitItems: self.habitItems, habit: habit)
-                        }
+                    ForEach(self.habitItems.habits, id: \.id){habit in
+                        HabitRowView(habitItems: self.habitItems, habit: habit)
                     }
                 }
-                .padding(.top, 16)
             }
             
             VStack{

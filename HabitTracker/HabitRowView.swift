@@ -42,7 +42,9 @@ struct HabitRowView: View {
                             
                             VStack(alignment: .trailing){
                                 Button(action: {
-                                    self.habitItems.complete(withHabitId: self.habit.id)
+                                    withAnimation{
+                                        self.habitItems.complete(withHabitId: self.habit.id)
+                                    }
                                 }) {
                                     ZStack {
                                         Circle()
