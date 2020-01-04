@@ -56,7 +56,7 @@ struct HabitDetailView: View {
                                 Text("Current Streak")
                                     .font(.title)
                                 HStack(alignment: .center){
-                                    Text("\(self.habit.currentStreak)")
+                                    Text("\(self.habit.calculatedCurrentStreak)")
                                         .font(.title)
                                     Image(systemName: "flame")
                                         .resizable()

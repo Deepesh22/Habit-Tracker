@@ -21,6 +21,19 @@ struct Habit: Identifiable, Codable{
     var lastCompletionDate: Date?
     var numberOfCompletion: Int = 0
     
+    
+    var calculatedCurrentStreak: Int{
+        if let lastDate = lastCompletionDate{
+            if lastDate.isYesterday || lastDate.isToday{
+                return currentStreak
+            }else{
+                return 0
+            }
+        }else{
+            return 0
+        }
+    }
+    
     var success: Double{
         let totalDays = countDays(startDate, Date()) + 1
         
@@ -68,8 +81,8 @@ class HabitItems: ObservableObject{
     func complete(withHabitId: UUID){
         for index in 0..<self.habits.count{
             if self.habits[index].id == withHabitId{
+                self.habits[index].currentStreak = self.habits[index].calculatedCurrentStreak + 1
                 self.habits[index].lastCompletionDate = Date()
-                self.habits[index].currentStreak += 1
                 if self.habits[index].currentStreak >= self.habits[index].bestStreak{
                     self.habits[index].bestStreak =  self.habits[index].currentStreak
                 }
