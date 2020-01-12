@@ -26,90 +26,108 @@ struct HabitDetailView: View {
     
     var body: some View {
         NavigationView{
-            GeometryReader{ geo in
-                ZStack{
+            Form{
+                Section(header: Text(habit.name)
+                                    .font(.largeTitle)
+                                    .fontWeight(.heavy)
+                                    .foregroundColor(.primary)
+                    ){
+                    Text(self.habit.type)
+                        .font(.headline)
+                        .foregroundColor(Color.red)
+                        .padding(.init(top: 0, leading: 20, bottom: 20, trailing: 0))
                     
-                    LinearGradient(gradient: Gradient(colors: [Color.init(red: 179/255, green: 74/255, blue: 254/255), Color.init(red: 48/255, green: 195/255, blue: 253/255)]), startPoint: .topLeading, endPoint: .bottomTrailing)
-                        .edgesIgnoringSafeArea(.all)
+                    Text(self.habit.note)
+                        .padding(.init(top: 0, leading: 20, bottom: 20, trailing: 0))
+                        .foregroundColor(.secondary)
+                        .font(.subheadline)
+                }
+                        
+                Section(header: Text("Your Streaks")
+                                    .foregroundColor(.primary)
+                                    .fontWeight(.heavy)
+                                    .font(.headline)
+                    ){
+                    HStack{
                     
-                    VStack(alignment: .leading, spacing: 5){
-            
-                        HStack{
-                            
-                            VStack(alignment: .leading){
-                                Text("Best Streak")
+                        VStack(){
+                            Text("Best")
+                                .font(.title)
+                            HStack(){
+                                 Text("\(self.habit.bestStreak)")
                                     .font(.title)
-                                HStack(alignment: .center){
-                                    Text("\(self.habit.bestStreak)")
-                                        .font(.title)
-                                    Image(systemName: "flame.fill")
-                                        .resizable()
-                                        .foregroundColor(Color.red)
-                                        .frame(width: 20, height: 25)
-                                }
-                            }
-                            
-                            Spacer()
-                            Divider()
-                            
-                            VStack(alignment: .leading){
-                                Text("Current Streak")
-                                    .font(.title)
-                                HStack(alignment: .center){
-                                    Text("\(self.habit.calculatedCurrentStreak)")
-                                        .font(.title)
-                                    Image(systemName: "flame")
-                                        .resizable()
-                                        .foregroundColor(Color.red)
-                                        .frame(width: 20, height: 25)
-                                }
+                                Image(systemName: "star.fill")
+                                     .resizable()
+                                     .foregroundColor(Color.init(red: 1, green: 215/255, blue: 0))
+                                     .frame(width: 50, height: 50)
                             }
                         }
-                        .padding(40)
+                        .padding(.init(top: 0, leading: 20, bottom: 0, trailing: 0))
                         
-                        Divider()
+                        Spacer()
                         
-                        VStack(alignment: .leading){
+                        VStack(){
+                            Text("Current")
+                                .font(.title)
+                            HStack(){
+                                Text("\(self.habit.calculatedCurrentStreak)")
+                                    .font(.title)
+                                Image(systemName: "star")
+                                    .resizable()
+                                    .foregroundColor(Color.init(red: 1, green: 215/255, blue: 0))
+                                    .frame(width: 50, height: 50)
+                            }
+                        }
+                        .padding(.init(top: 0, leading: 0, bottom: 0, trailing: 20))
+                    }
+                    .padding(.init(top: 20, leading: 0, bottom: 20, trailing: 0))
+                        
+                }
+                
+                Section(header: Text("About Your Consistency")
+                                    .foregroundColor(.primary)
+                                    .fontWeight(.heavy)
+                                    .font(.headline)
+                    ){
+                    HStack{
+                        VStack(){
                             Text("Days done")
                                 .font(.title)
                             HStack(alignment: .center){
                                 Text("\(self.habit.numberOfCompletion)")
                                     .font(.title)
-                                Image(systemName: "sparkles")
+                                Image(systemName: "stopwatch")
                                     .resizable()
-                                    .foregroundColor(Color.white)
-                                    .frame(width: 20, height: 30)
+                                    .frame(width: 30, height: 30)
                             }
                         }
-                        .padding(40)
-                        
-                        Divider()
-                        
-                        Text("Following this habit from \(self.formatterDate) with \(self.habit.success*100, specifier: "%.2f")% success")
-                            .font(.headline)
-                            .fontWeight(.bold)
-                            .foregroundColor(.secondary)
-                            .italic()
-                            .padding(40)
-                        
-                        HStack(){
-                            Spacer()
-                            Text(self.habit.type)
-                                .font(.title)
-                                .padding()
-                                .foregroundColor(.red)
-                                .background(Color.white)
-                                .cornerRadius(50)
-                            Spacer()
-                        }
-                        .padding(40)
-                        
+                        .padding(.init(top: 0, leading: 20, bottom: 0, trailing: 0))
                         
                         Spacer()
+                        
+                        VStack(){
+                            Text("Total Days")
+                                .font(.title)
+                            HStack(alignment: .center){
+                                Text("\(self.habit.totalDays)")
+                                    .font(.title)
+                                Image(systemName: "stopwatch.fill")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                            }
+                        }
+                        .padding(.init(top: 0, leading: 0, bottom: 0, trailing: 20))
+
                     }
+                        
+                    Text("Following this habit from \(self.formatterDate) with \(self.habit.success*100, specifier: "%.2f")% success")
+                    .font(.headline)
+                    .fontWeight(.bold)
+                    .foregroundColor(.secondary)
+                    .italic()
+                    .padding(.init(top: 20, leading: 20, bottom: 20, trailing: 20))
                 }
             }
-            .navigationBarTitle(habit.name)
             .navigationBarItems(trailing:
                 Button("Delete"){
                     self.habitItems.remove(withHabitId: self.habit.id)
@@ -117,5 +135,11 @@ struct HabitDetailView: View {
                 }
             )
         }
+    }
+}
+
+struct HabitDetailView_Previews : PreviewProvider {
+    static var previews: some View {
+        HabitDetailView(habit: Habit(type: "type", name: "name", note: "note", startDate: Date()), habitItems: HabitItems())
     }
 }

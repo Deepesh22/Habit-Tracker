@@ -34,9 +34,11 @@ struct Habit: Identifiable, Codable{
         }
     }
     
+    var totalDays: Int{
+        return countDays(startDate, Date()) + 1
+    }
+    
     var success: Double{
-        let totalDays = countDays(startDate, Date()) + 1
-        
         return  Double(numberOfCompletion) / Double(totalDays)
     }
     

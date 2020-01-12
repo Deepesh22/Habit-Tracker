@@ -40,7 +40,7 @@ struct AddHabit: View {
             GeometryReader{ geo in
                 ZStack{
                     
-                    LinearGradient(gradient: Gradient(colors: [Color.init(red: 179/255, green: 74/255, blue: 254/255), Color.init(red: 48/255, green: 195/255, blue: 253/255)]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                    LinearGradient(gradient: Gradient(colors: [.red, .black]), startPoint: .topLeading, endPoint: .bottomTrailing)
                         .edgesIgnoringSafeArea(.all)
                     
                     VStack(alignment: .leading, spacing: 5){
@@ -51,7 +51,7 @@ struct AddHabit: View {
                                 .frame(width: geo.size.width - 20, height: 80)
                             VStack(alignment: .leading){
                                 Text("So what's the habit???")
-                                TextField("Add Name", text: self.$name)
+                                TextField("Add Name for the habit...", text: self.$name)
                             }
                             .padding(40)
                         }
@@ -61,7 +61,7 @@ struct AddHabit: View {
                                 .frame(width: geo.size.width - 20, height: 80)
                             VStack(alignment: .leading){
                                 Text("This habit is all about???")
-                                TextField("Add a note", text: self.$note)
+                                TextField("Add a note describing why you want to do it...", text: self.$note)
                             }
                             .padding(40)
                         }
