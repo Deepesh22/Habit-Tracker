@@ -10,9 +10,9 @@ import SwiftUI
 
 struct HabitDetailView: View {
     
-    let habit: Habit
+    var habit: Habit
     let habitItems: HabitItems
-    
+        
     @Environment(\.presentationMode) var presentationMode
     
     var formatterDate: String{
@@ -23,6 +23,18 @@ struct HabitDetailView: View {
         
         return formatter.string(from: habit.startDate)
     }
+    
+    var time: String{
+        var hour = Calendar.current.component(.hour, from: self.habit.reminderTime)
+        let minute = Calendar.current.component(.minute, from: self.habit.reminderTime)
+        var holder = "AM"
+        if hour > 12{
+            hour -= 12
+            holder = "PM"
+        }
+        return "\(hour):\(minute) \(holder)"
+    }
+
     
     var body: some View {
         NavigationView{
@@ -127,6 +139,40 @@ struct HabitDetailView: View {
                     .italic()
                     .padding(.init(top: 20, leading: 20, bottom: 20, trailing: 20))
                 }
+                
+                Section(header: Text("Reminders")
+                                    .foregroundColor(.primary)
+                                    .fontWeight(.heavy)
+                                    .font(.headline)
+                    ){
+                        Button(action: {
+                            if self.habit.reminder!{
+                                self.habitItems.setReminder(withHabitId: self.habit.id, setValue: false)
+                            }else{
+                                self.habitItems.setReminder(withHabitId: self.habit.id, setValue: true)
+                            }
+                        }){
+                            if self.habit.reminder!{
+                                Text("On")
+                            }else{
+                                Text("Off")
+                            }
+                        }
+                        if self.habit.reminder!{
+                            VStack{
+                                HStack{
+                                    Image(systemName: "bell.fill")
+                                        .renderingMode(.original)
+                                    Text("Daily at \(self.time)")
+                                        .fontWeight(.heavy)
+                                        
+                                }
+                                Text("Message -> \(self.habit.reminderTitle)")
+                                    .fontWeight(.semibold)
+                            }
+                            .foregroundColor(.secondary)
+                        }
+                }
             }
             .navigationBarItems(trailing:
                 Button("Delete"){
@@ -140,6 +186,6 @@ struct HabitDetailView: View {
 
 struct HabitDetailView_Previews : PreviewProvider {
     static var previews: some View {
-        HabitDetailView(habit: Habit(type: "type", name: "name", note: "note", startDate: Date()), habitItems: HabitItems())
+        HabitDetailView(habit: Habit(type: "type", name: "name", note: "note", startDate: Date(), reminderTitle: "Random", reminderTime: Date()), habitItems: HabitItems())
     }
 }

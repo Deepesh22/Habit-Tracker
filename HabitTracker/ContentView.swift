@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 struct ContentView: View {
     
@@ -44,7 +45,9 @@ struct ContentView: View {
                 HStack{
                     Spacer()
                     
-                    Button(action: {self.addMoreScreenIsPresented.toggle()}){
+                    Button(action: {
+                        self.addMoreScreenIsPresented.toggle()
+                    }){
                         Text("+")
                             .font(.largeTitle)
                     }
@@ -59,7 +62,17 @@ struct ContentView: View {
         }
         .sheet(isPresented: $addMoreScreenIsPresented){
             AddHabit(habitItems: self.habitItems)
+            
         }
+        .onAppear(perform: {
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]){ success, error in
+                if success{
+                    print("Permission Granted")
+                }else if let error = error{
+                    print(error.localizedDescription)
+                }
+            }
+        })
     }
 }
 

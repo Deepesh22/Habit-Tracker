@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import UserNotifications
 
 struct Habit: Identifiable, Codable{
     
@@ -20,6 +20,11 @@ struct Habit: Identifiable, Codable{
     var currentStreak: Int = 0
     var lastCompletionDate: Date?
     var numberOfCompletion: Int = 0
+    
+    var reminder: Bool?
+
+    var reminderTitle: String
+    var reminderTime: Date
     
     
     var calculatedCurrentStreak: Int{
@@ -89,6 +94,39 @@ class HabitItems: ObservableObject{
                     self.habits[index].bestStreak =  self.habits[index].currentStreak
                 }
                 self.habits[index].numberOfCompletion += 1
+                
+                break
+            }
+        }
+    }
+    
+    func setReminder(withHabitId: UUID, setValue: Bool){
+        for index in 0..<self.habits.count{
+            if self.habits[index].id == withHabitId{
+                self.habits[index].reminder = setValue
+                
+                if setValue == true{
+                    let content = UNMutableNotificationContent()
+                    content.title = self.habits[index].reminderTitle
+                    content.sound = UNNotificationSound.default
+
+                    var dateComponents = DateComponents()
+                    dateComponents.hour = Calendar.current.component(.hour, from: self.habits[index].reminderTime)
+                    dateComponents.minute = Calendar.current.component(.minute, from: self.habits[index].reminderTime)
+                    let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+
+                    // choose a random identifier
+                    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+                    // add our notification request
+                    UNUserNotificationCenter.current().add(request)
+                    
+                    print("Notification Added")
+                
+                }else{
+                    UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                    print("Notification Removed")
+                }
                 
                 break
             }
