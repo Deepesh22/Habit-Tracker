@@ -23,8 +23,8 @@ struct Habit: Identifiable, Codable{
     
     var reminder: Bool?
 
-    var reminderTitle: String
-    var reminderTime: Date
+    var reminderTitle: String?
+    var reminderTime: Date?
     
     
     var calculatedCurrentStreak: Int{
@@ -100,19 +100,21 @@ class HabitItems: ObservableObject{
         }
     }
     
-    func setReminder(withHabitId: UUID, setValue: Bool){
+    func setReminder(withHabitId: UUID, setValue: Bool, title: String, date: Date){
         for index in 0..<self.habits.count{
             if self.habits[index].id == withHabitId{
                 self.habits[index].reminder = setValue
+                self.habits[index].reminderTitle = title
+                self.habits[index].reminderTime = date
                 
                 if setValue == true{
                     let content = UNMutableNotificationContent()
-                    content.title = self.habits[index].reminderTitle
+                    content.title = title
                     content.sound = UNNotificationSound.default
 
                     var dateComponents = DateComponents()
-                    dateComponents.hour = Calendar.current.component(.hour, from: self.habits[index].reminderTime)
-                    dateComponents.minute = Calendar.current.component(.minute, from: self.habits[index].reminderTime)
+                    dateComponents.hour = Calendar.current.component(.hour, from: date)
+                    dateComponents.minute = Calendar.current.component(.minute, from: date)
                     let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
 
                     // choose a random identifier

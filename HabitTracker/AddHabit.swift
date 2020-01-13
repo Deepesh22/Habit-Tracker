@@ -25,10 +25,7 @@ struct AddHabit: View {
     @State private var time = defaultReminderTime
 
     static var defaultReminderTime: Date{
-        var components = DateComponents()
-        components.hour = 6
-        components.minute = 0
-        return Calendar.current.date(from: components) ?? Date()
+        return Date()
     }
     
     static let types = ["To Build", "To Quit"]
@@ -38,7 +35,7 @@ struct AddHabit: View {
             GeometryReader{ geo in
                 ZStack{
                     
-                    LinearGradient(gradient: Gradient(colors: [.red, .black]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                    LinearGradient(gradient: Gradient(colors: [Color.init(red: 48/255, green: 195/255, blue: 253/255), Color.init(red: 179/255, green: 74/255, blue: 254/255)]), startPoint: .topLeading, endPoint: .bottomTrailing)
                         .edgesIgnoringSafeArea(.all)
                     VStack{
                         VStack(alignment: .leading, spacing: 40){
@@ -121,9 +118,9 @@ struct AddHabit: View {
             .navigationBarTitle("Add new habit")
             .navigationBarItems(trailing: Button("Save") {
                 if self.name != "" && self.note != ""{
-                    let item = Habit(type: self.type, name: self.name, note: self.note, startDate: Date(), reminderTitle: self.contentTitle, reminderTime: self.time)
+                    let item = Habit(type: self.type, name: self.name, note: self.note, startDate: Date())
                     self.habitItems.habits.append(item)
-                    self.habitItems.setReminder(withHabitId: item.id, setValue: self.showingReminder)
+                    self.habitItems.setReminder(withHabitId: item.id, setValue: self.showingReminder, title: self.contentTitle, date: self.time)
                     self.presentationMode.wrappedValue.dismiss()
                 }
             }
