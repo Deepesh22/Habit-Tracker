@@ -11,17 +11,19 @@ A habit tracking app build using SwiftUI.
 
 ## Demo
 > Demo of app
+
 ![](demo/demo.gif)
 
 > notification screenshot
+
 ![](demo/notification.png)
 
 
 
 
 ## Todo
-> Migrate to core data from current User Defaults
+- [ ] Migrate to core data from current User Defaults
 
-> Add calendar view for completed days
+- [ ] Add calendar view for completed days
 
-> Improve UI of detail page, currently using form.
+- [ ] Improve UI of detail page, currently using form.
