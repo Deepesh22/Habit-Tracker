@@ -38,7 +38,7 @@ struct AddHabit: View {
                     LinearGradient(gradient: Gradient(colors: [Color.init(red: 48/255, green: 195/255, blue: 253/255), Color.init(red: 179/255, green: 74/255, blue: 254/255)]), startPoint: .topLeading, endPoint: .bottomTrailing)
                         .edgesIgnoringSafeArea(.all)
                     VStack{
-                        VStack(alignment: .leading, spacing: 40){
+                        VStack(alignment: .leading, spacing: 20){
 
                             ZStack {
                                 RoundedRectangle(cornerRadius: 10, style: .circular)
@@ -50,6 +50,8 @@ struct AddHabit: View {
                                 }
                                 .padding(.init(top: 10, leading: 20, bottom: 0, trailing: 40))
                             }
+                            .padding(.init(top: 10, leading: 0, bottom: 0, trailing: 0))
+                            
                             ZStack {
                                 RoundedRectangle(cornerRadius: 10, style: .circular)
                                     .foregroundColor(Color.init(.sRGB, red: 1, green: 1, blue: 1, opacity: 0.5))
@@ -77,7 +79,9 @@ struct AddHabit: View {
                             }
                         }
                         
-                        VStack{
+                        Divider()
+                        
+                        VStack(alignment: .leading){
                             Toggle(isOn: self.$showingReminder.animation()){
                                 Text("Reminder")
                             }
@@ -98,18 +102,19 @@ struct AddHabit: View {
                                     .padding(.init(top: 10, leading: 20, bottom: 0, trailing: 40))
                                 }
                                 
-                                ZStack {
+                                VStack (alignment: .leading){
                                     HStack{
                                         Image(systemName: "clock")
                                         Text("Reminder Time")
                                     }
-                                    .padding(.init(top: 10, leading: 20, bottom: 0, trailing: 40))                                   }
                                     
                                     DatePicker("Select time", selection: self.$time, displayedComponents: .hourAndMinute)
                                     .labelsHidden()
                                     .datePickerStyle(WheelDatePickerStyle())
                                 }
+                                .padding(.init(top: 10, leading: 20, bottom: 0, trailing: 40))
                             }
+                        }
                         Spacer()
                     }
                 }

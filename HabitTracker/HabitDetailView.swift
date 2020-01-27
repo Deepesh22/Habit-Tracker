@@ -243,4 +243,3 @@ struct HabitDetailView_Previews : PreviewProvider {
     }
 }
 
-// reminderTitle: "You are about to lose Streaks!", reminderTime: Date()
